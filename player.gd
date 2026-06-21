@@ -3,6 +3,7 @@ extends CharacterBody2D
 const SPEED = 300.0
 const JUMP_VELOCITY = -800.0
 const FLOAT_GRAVITY_MULTIPLIER = 0.2
+var wind_push := Vector2.ZERO
 
 # Variabele om te onthouden of we de vorige frame in de lucht waren
 var was_in_air := false
@@ -57,5 +58,9 @@ func _physics_process(delta: float) -> void:
 			$AnimatedSprite2D.play("jump_down")
 		else: 
 			$AnimatedSprite2D.play("between_up_down")
+			
+	velocity.x += wind_push.y * -1.3
+	if not is_on_floor():
+		velocity.y += wind_push.x * 0.4
 
 	move_and_slide()

@@ -19,6 +19,11 @@ run/main_scene="uid://cxgtjk4oyq8dr"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[display]
+
+window/size/viewport_width=2400
+window/size/viewport_height=1200
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/godot_super-wakatime/plugin.cfg")
