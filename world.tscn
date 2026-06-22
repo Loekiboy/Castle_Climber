@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://cnfscbwdosotu" path="res://assets/grass.png" id="3_tlwt5"]
 [ext_resource type="Texture2D" uid="uid://coc8gonfygrg" path="res://assets/castle.png" id="4_036b0"]
 [ext_resource type="PackedScene" uid="uid://b8yw87hrxycri" path="res://fan.tscn" id="4_aqk2v"]
+[ext_resource type="Texture2D" uid="uid://42sjp0vn8itb" path="res://assets/wall_decorations.png" id="5_dwbse"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2o6r5"]
 atlas = ExtResource("2_tlwt5")
@@ -856,7 +857,8 @@ use_texture_padding = false
 6:0/0/terrains_peering_bit/top_left_corner = 1
 6:0/0/terrains_peering_bit/top_side = 1
 6:0/0/terrains_peering_bit/top_right_corner = 1
-8:0/animation_columns = 1
+8:0/animation_frame_0/duration = 0.2
+8:0/animation_frame_1/duration = 0.2
 8:0/0 = 0
 8:0/0/z_index = -1
 8:0/0/terrain_set = 0
@@ -903,6 +905,10 @@ use_texture_padding = false
 16:0/0/terrains_peering_bit/bottom_left_corner = 1
 16:0/0/terrains_peering_bit/left_side = 1
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pkg7o"]
+texture = ExtResource("5_dwbse")
+texture_region_size = Vector2i(128, 128)
+
 [sub_resource type="TileSet" id="TileSet_036b0"]
 tile_size = Vector2i(128, 128)
 physics_layer_0/collision_layer = 1
@@ -911,8 +917,11 @@ terrain_set_0/terrain_0/name = "grass"
 terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
 terrain_set_0/terrain_1/name = "castle"
 terrain_set_0/terrain_1/color = Color(0.3242712, 0.33674887, 0.3483837, 1)
+terrain_set_0/terrain_2/name = "wall_decorations"
+terrain_set_0/terrain_2/color = Color(0.8319196, 0.2262162, 0.15048262, 1)
 sources/0 = SubResource("TileSetAtlasSource_aqk2v")
 sources/1 = SubResource("TileSetAtlasSource_dwbse")
+sources/2 = SubResource("TileSetAtlasSource_pkg7o")
 
 [node name="world" type="Node2D" unique_id=868817724]
 position = Vector2(630, 342)
