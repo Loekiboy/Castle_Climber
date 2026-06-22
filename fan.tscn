@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bdcew7euh0bqh" path="res://fan.gd" id="1_3ml7w"]
 [ext_resource type="Texture2D" uid="uid://c4dhbseh8pqat" path="res://assets/fan-stand.png" id="1_7l2ec"]
 [ext_resource type="Texture2D" uid="uid://d286hrvbok24b" path="res://assets/fan.png" id="2_3ml7w"]
+[ext_resource type="Texture2D" uid="uid://biclhpqr37r1d" path="res://assets/wind-particle.png" id="4_tc01m"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tc01m"]
 atlas = ExtResource("1_7l2ec")
@@ -77,7 +78,21 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eshmn"]
-size = Vector2(375, 75)
+size = Vector2(549.38257, 75)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qoasc"]
+particle_flag_align_y = true
+particle_flag_disable_z = true
+spread = 2.0
+initial_velocity_min = 301.06
+initial_velocity_max = 305.27
+gravity = Vector3(0, 0, 0)
+hue_variation_min = -0.04000002
+hue_variation_max = -2.2351742e-08
+turbulence_noise_strength = 0.0
+turbulence_noise_scale = 0.0
+turbulence_influence_min = 0.0
+turbulence_influence_max = 0.006
 
 [node name="fan" type="Node2D" unique_id=2123101215]
 script = ExtResource("1_3ml7w")
@@ -90,7 +105,7 @@ frame_progress = 0.8509682
 
 [node name="Rotator" type="Node2D" parent="." unique_id=1429579909]
 position = Vector2(4, -2)
-rotation = -0.9023352
+rotation = -0.6963864
 
 [node name="Blades" type="AnimatedSprite2D" parent="Rotator" unique_id=814085140]
 sprite_frames = SubResource("SpriteFrames_aqk2v")
@@ -100,8 +115,35 @@ frame_progress = 0.87582314
 [node name="WindZone" type="Area2D" parent="Rotator" unique_id=782168759]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Rotator/WindZone" unique_id=923217167]
-position = Vector2(204.5, -2.4999626)
+position = Vector2(291.69128, -2.4999638)
 shape = SubResource("RectangleShape2D_eshmn")
+
+[node name="WindParticle" type="GPUParticles2D" parent="Rotator" unique_id=1098267182]
+z_index = -1
+position = Vector2(1.962965, -25.732212)
+amount = 60
+texture = ExtResource("4_tc01m")
+lifetime = 1.8499999999999999
+collision_base_size = 0.0
+process_material = SubResource("ParticleProcessMaterial_qoasc")
+
+[node name="WindParticle" type="GPUParticles2D" parent="Rotator/WindParticle" unique_id=1110195835]
+z_index = -1
+position = Vector2(-2.3787289, 44.937084)
+amount = 60
+texture = ExtResource("4_tc01m")
+lifetime = 1.8499999999999999
+collision_base_size = 0.0
+process_material = SubResource("ParticleProcessMaterial_qoasc")
+
+[node name="WindParticle" type="GPUParticles2D" parent="Rotator/WindParticle/WindParticle" unique_id=1374766598]
+z_index = -1
+position = Vector2(-0.6028347, -22.66354)
+amount = 60
+texture = ExtResource("4_tc01m")
+lifetime = 1.8499999999999999
+collision_base_size = 0.0
+process_material = SubResource("ParticleProcessMaterial_qoasc")
 
 [connection signal="body_entered" from="Rotator/WindZone" to="." method="_on_wind_zone_body_entered"]
 [connection signal="body_exited" from="Rotator/WindZone" to="." method="_on_wind_zone_body_exited"]

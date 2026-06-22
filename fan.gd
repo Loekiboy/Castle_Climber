@@ -28,7 +28,7 @@ func _physics_process(delta: float) -> void:
 		
 		if not player_in_zone.is_on_floor() and Input.is_action_pressed("ui_accept"):
 			multiplier = 2
-			$Stand.speed_scale = 2.0         
+			$Stand.speed_scale = 2       
 		else:
 			$Stand.speed_scale = 1.3
 			

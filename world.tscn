@@ -10,6 +10,22 @@
 atlas = ExtResource("2_tlwt5")
 region = Rect2(1280, 0, 128, 128)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_70uel"]
+atlas = ExtResource("2_tlwt5")
+region = Rect2(1408, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hiqwa"]
+atlas = ExtResource("2_tlwt5")
+region = Rect2(1536, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2u3nc"]
+atlas = ExtResource("2_tlwt5")
+region = Rect2(1792, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_udxuc"]
+atlas = ExtResource("2_tlwt5")
+region = Rect2(1920, 0, 128, 128)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_tlwt5"]
 atlas = ExtResource("2_tlwt5")
 region = Rect2(1024, 0, 128, 128)
@@ -58,6 +74,28 @@ animations = [{
 }],
 "loop": 1,
 "name": &"between_up_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_70uel")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hiqwa")
+}],
+"loop": 1,
+"name": &"crouch",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2u3nc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_udxuc")
+}],
+"loop": 1,
+"name": &"crouch_walk",
 "speed": 5.0
 }, {
 "frames": [{
@@ -117,7 +155,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ioo17"]
-size = Vector2(77, 131)
+size = Vector2(77, 127)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_aqk2v"]
 texture = ExtResource("3_tlwt5")
@@ -884,10 +922,10 @@ script = ExtResource("1_fj7yv")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player" unique_id=1303052294]
 sprite_frames = SubResource("SpriteFrames_gbfbk")
-animation = &"between_up_down"
+animation = &"crouch_walk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player" unique_id=2061389654]
-position = Vector2(-0.5, 1.5)
+position = Vector2(-0.5, -0.5)
 shape = SubResource("RectangleShape2D_ioo17")
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=425282261]

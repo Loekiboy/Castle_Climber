@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 const SPEED = 300.0
+const CROUCH_SPEED = 200.0 # Snelheid tijdens het crouch-lopen (minder sloom dan stilstaan!)
 const JUMP_VELOCITY = -800.0
 const FLOAT_GRAVITY_MULTIPLIER = 0.2
 var wind_push := Vector2.ZERO
@@ -24,23 +25,39 @@ func _physics_process(delta: float) -> void:
 	was_in_air = not is_on_floor()
 
 	# 3. Springen afhandelen
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+	if Input.is_action_just_pressed("ui_accept") and is_on_floor() and not Input.is_action_pressed("ui_down"):
 		velocity.y = JUMP_VELOCITY
 		$LandingTimer.stop() # Stop de landingstimer meteen als je direct weer springt
 
 	# 4. Lopen en richting bepalen
 	var direction := Input.get_axis("ui_left", "ui_right")
+	
+	# Check of we de crouch-knop ingedrukt houden op de grond
+	var is_crouching := Input.is_action_pressed("ui_down") and is_on_floor()
+
 	if direction:
-		velocity.x = direction * SPEED
+		# Als je croucht, gebruik je CROUCH_SPEED, anders de normale SPEED
+		if is_crouching:
+			velocity.x = direction * CROUCH_SPEED
+		else:
+			velocity.x = direction * SPEED
 		$AnimatedSprite2D.flip_h = direction < 0
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
+		if is_crouching:
+			velocity.x = move_toward(velocity.x, 0, CROUCH_SPEED)
+		else:
+			velocity.x = move_toward(velocity.x, 0, SPEED)
 
 	# 5. De juiste animaties afspelen op basis van de situatie
 	if is_on_floor():
 		# Als de landingstimer loopt, dwing dan het tussen-frame af
 		if not $LandingTimer.is_stopped():
 			$AnimatedSprite2D.play("between_up_down")
+		elif is_crouching:
+			if direction:
+				$AnimatedSprite2D.play("crouch_walk") 
+			else:
+				$AnimatedSprite2D.play("crouch")
 		elif direction:
 			$AnimatedSprite2D.play("walk")
 		else:
