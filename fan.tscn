@@ -123,8 +123,9 @@ z_index = -1
 position = Vector2(1.962965, -25.732212)
 amount = 60
 texture = ExtResource("4_tc01m")
-lifetime = 1.8499999999999999
+lifetime = 1.85
 collision_base_size = 0.0
+visibility_rect = Rect2(-100, -100, 1000, 1000)
 process_material = SubResource("ParticleProcessMaterial_qoasc")
 
 [node name="WindParticle" type="GPUParticles2D" parent="Rotator/WindParticle" unique_id=1110195835]
@@ -132,8 +133,9 @@ z_index = -1
 position = Vector2(-2.3787289, 44.937084)
 amount = 60
 texture = ExtResource("4_tc01m")
-lifetime = 1.8499999999999999
+lifetime = 1.85
 collision_base_size = 0.0
+visibility_rect = Rect2(-100, -100, 1000, 1000)
 process_material = SubResource("ParticleProcessMaterial_qoasc")
 
 [node name="WindParticle" type="GPUParticles2D" parent="Rotator/WindParticle/WindParticle" unique_id=1374766598]
@@ -141,8 +143,9 @@ z_index = -1
 position = Vector2(-0.6028347, -22.66354)
 amount = 60
 texture = ExtResource("4_tc01m")
-lifetime = 1.8499999999999999
+lifetime = 1.85
 collision_base_size = 0.0
+visibility_rect = Rect2(-100, -100, 1000, 1000)
 process_material = SubResource("ParticleProcessMaterial_qoasc")
 
 [connection signal="body_entered" from="Rotator/WindZone" to="." method="_on_wind_zone_body_entered"]

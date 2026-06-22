@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 const SPEED = 300.0
-const CROUCH_SPEED = 200.0 # Snelheid tijdens het crouch-lopen (minder sloom dan stilstaan!)
+const CROUCH_SPEED = 230.0
 const JUMP_VELOCITY = -800.0
 const FLOAT_GRAVITY_MULTIPLIER = 0.2
 var wind_push := Vector2.ZERO
@@ -19,7 +19,7 @@ func _physics_process(delta: float) -> void:
 
 	# 2. Landings-detectie (Start de timer zodra je de grond raakt)
 	if is_on_floor() and was_in_air:
-		$LandingTimer.start(0.15) # Verander 0.15 om de landing korter of langer te maken
+		$LandingTimer.start(0.15)
 	
 	# Status onthouden voor het volgende frame
 	was_in_air = not is_on_floor()
@@ -65,7 +65,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		# De speler is in de lucht!
 		if Input.is_action_pressed("ui_accept") and velocity.y > -100:
-			# Als de knop ingedrukt is en we vallen (of zijn bijna op het hoogste punt), start het zweven
+			# Als de knop ingedrukt is en we vallen, start het zweven
 			$AnimatedSprite2D.play("float")
 		elif velocity.y < -150:
 			# De speler gaat nog hard omhoog
@@ -76,7 +76,8 @@ func _physics_process(delta: float) -> void:
 		else: 
 			$AnimatedSprite2D.play("between_up_down")
 			
-	velocity.x += wind_push.y * -1.3
+	if not is_on_floor() or wind_push.y > 50 or wind_push.y < -50:
+		velocity.x += wind_push.y * -1.3
 	if not is_on_floor():
 		velocity.y += wind_push.x * 0.4
 
