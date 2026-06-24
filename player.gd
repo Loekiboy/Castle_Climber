@@ -4,6 +4,7 @@ const SPEED = 300.0
 const CROUCH_SPEED = 230.0
 const JUMP_VELOCITY = -800.0
 const FLOAT_GRAVITY_MULTIPLIER = 0.2
+const MAX_FLOAT_FALL_SPEED = 250.0
 
 const WALL_SLIDE_SPEED = 150.0 
 const WALL_JUMP_VERTICAL = -650.0
@@ -17,10 +18,19 @@ var wall_jump_lock := 0.0
 var wall_coyote_timer := 0.0
 var last_wall_normal := Vector2.ZERO
 
+var floor_coyote_timer := 0.0
+
 func _physics_process(delta: float) -> void:
 	var direction := Input.get_axis("ui_left", "ui_right")
 	
 	var wall_normal := Vector2.ZERO
+	
+	# ---- Coyote timer voor vloer ----
+	if is_on_floor():
+		floor_coyote_timer = 0.15
+	else:
+		if floor_coyote_timer > 0:
+			floor_coyote_timer -= delta
 	
 	# ---- 0. Muur-detectie & subtiele Squish tegen de muur ----
 	if is_on_wall():
@@ -49,8 +59,12 @@ func _physics_process(delta: float) -> void:
 				velocity.y = WALL_SLIDE_SPEED
 		elif Input.is_action_pressed("ui_accept") and velocity.y > 0:
 			velocity += (get_gravity() * FLOAT_GRAVITY_MULTIPLIER) * delta
+			velocity.y = clampf(velocity.y, -INF, MAX_FLOAT_FALL_SPEED)
 		else:
 			velocity += get_gravity() * delta
+
+	if Input.is_action_just_released("ui_accept") and velocity.y < 0:
+		velocity.y *= 0.5
 
 	# ---- 2. Landings-detectie & subtiele Landing Squish ----
 	if is_on_floor() and was_in_air:
@@ -69,8 +83,9 @@ func _physics_process(delta: float) -> void:
 		$LandingTimer.stop()
 		$AnimatedSprite2D.scale = Vector2(0.92, 1.08)
 		
-	elif Input.is_action_just_pressed("ui_accept") and is_on_floor() and not Input.is_action_pressed("ui_down"):
+	elif Input.is_action_just_pressed("ui_accept") and floor_coyote_timer > 0 and not Input.is_action_pressed("ui_down"):
 		velocity.y = JUMP_VELOCITY
+		floor_coyote_timer = 0.0
 		$LandingTimer.stop()
 		$AnimatedSprite2D.scale = Vector2(0.92, 1.08)
 
