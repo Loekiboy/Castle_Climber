@@ -78,7 +78,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eshmn"]
-size = Vector2(549.38257, 75)
+size = Vector2(564.02637, 75)
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qoasc"]
 particle_flag_align_y = true
@@ -115,12 +115,12 @@ frame_progress = 0.87582314
 [node name="WindZone" type="Area2D" parent="Rotator" unique_id=782168759]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Rotator/WindZone" unique_id=923217167]
-position = Vector2(291.69128, -2.4999638)
+position = Vector2(299.01318, -2.4999743)
 shape = SubResource("RectangleShape2D_eshmn")
 
 [node name="WindParticle" type="GPUParticles2D" parent="Rotator" unique_id=1098267182]
 z_index = -1
-position = Vector2(1.962965, -25.732212)
+position = Vector2(29.619526, -26.070744)
 amount = 60
 texture = ExtResource("4_tc01m")
 lifetime = 1.85

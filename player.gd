@@ -5,7 +5,7 @@ const CROUCH_SPEED = 230.0
 const JUMP_VELOCITY = -800.0
 const FLOAT_GRAVITY_MULTIPLIER = 0.2
 
-const WALL_SLIDE_SPEED = 100.0 
+const WALL_SLIDE_SPEED = 150.0 
 const WALL_JUMP_VERTICAL = -650.0
 const WALL_JUMP_HORIZONTAL = 400.0
 
@@ -45,6 +45,8 @@ func _physics_process(delta: float) -> void:
 		if is_wall_sliding:
 			if velocity.y < WALL_SLIDE_SPEED:
 				velocity += get_gravity() * delta
+			else:
+				velocity.y = WALL_SLIDE_SPEED
 		elif Input.is_action_pressed("ui_accept") and velocity.y > 0:
 			velocity += (get_gravity() * FLOAT_GRAVITY_MULTIPLIER) * delta
 		else:
@@ -53,7 +55,7 @@ func _physics_process(delta: float) -> void:
 	# ---- 2. Landings-detectie & subtiele Landing Squish ----
 	if is_on_floor() and was_in_air:
 		$LandingTimer.start(0.15)
-		$AnimatedSprite2D.scale = Vector2(1.12, 0.88)
+		$AnimatedSprite2D.scale = Vector2(1.12 + velocity.y * 0.002  , 0.88)
 		
 	was_in_air = not is_on_floor()
 	was_on_wall = is_on_wall()
