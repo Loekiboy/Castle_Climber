@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 const SPEED = 300.0
 const CROUCH_SPEED = 230.0
-const JUMP_VELOCITY = -1200.0
+const JUMP_VELOCITY = -12000.0
 const FLOAT_GRAVITY_MULTIPLIER = 0.2
 const MAX_FLOAT_FALL_SPEED = 250.0
 

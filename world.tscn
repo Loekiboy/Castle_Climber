@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://coc8gonfygrg" path="res://assets/castle.png" id="4_036b0"]
 [ext_resource type="Texture2D" uid="uid://42sjp0vn8itb" path="res://assets/wall_decorations.png" id="5_dwbse"]
 [ext_resource type="Texture2D" uid="uid://cxcjmjpgors7a" path="res://assets/grass2.png" id="5_pkg7o"]
+[ext_resource type="Script" uid="uid://dkkm1rgx2fq1h" path="res://digit_counter.gd" id="7_pkg7o"]
+[ext_resource type="Texture2D" uid="uid://meopmdqeccot" path="res://assets/counter.png" id="8_gbfbk"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2o6r5"]
 atlas = ExtResource("2_tlwt5")
@@ -472,6 +474,13 @@ tile_set = SubResource("TileSet_dwbse")
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1915890669]
 
 [node name="HeightLabel" type="Label" parent="CanvasLayer" unique_id=584575453]
+visible = false
 offset_right = 40.0
 offset_bottom = 23.0
 text = "10m"
+
+[node name="DigitCounter" type="HBoxContainer" parent="CanvasLayer" unique_id=1656054407]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("7_pkg7o")
+tilesheet = ExtResource("8_gbfbk")
