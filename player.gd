@@ -20,6 +20,8 @@ var last_wall_normal := Vector2.ZERO
 
 var floor_coyote_timer := 0.0
 
+@onready var hoogte_label = $"../CanvasLayer/HeightLabel"
+
 func _physics_process(delta: float) -> void:
 	var direction := Input.get_axis("ui_left", "ui_right")
 	
@@ -137,3 +139,6 @@ func _physics_process(delta: float) -> void:
 	$AnimatedSprite2D.scale = $AnimatedSprite2D.scale.lerp(Vector2.ONE, delta * 15.0)
 
 	move_and_slide()
+func _process(delta: float) -> void:
+	var hoogte = (  round(-global_position.y) + 406) / 100
+	hoogte_label.text = str(hoogte) + " m "

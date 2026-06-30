@@ -24,14 +24,14 @@ func generate_next_chunk():
 
 		# 2. ramen en fakels
 		var decor_pool = [2, 2, 2, 3, 3, 3, 4, 5]
-		var number_of_windows = randi_range(3, 6)
+		var number_of_windows = randi_range(5, 9)
 		for j in range(number_of_windows):
 			var decoration_index = decor_pool.pick_random()
 			var random_x = randi_range(-10, 10)
 			decorations.set_cell(Vector2i(random_x, y), 0, Vector2i(decoration_index, 0))
 
 		# 3. ventilators
-		if randf() < 0.15:
+		if randf() < 0.25:
 			var fan = fan_scene.instantiate()
 			fan.position = Vector2(randi_range(-10, 10) * tile_size, y * tile_size)
 			var rotator = fan.get_node("Rotator")

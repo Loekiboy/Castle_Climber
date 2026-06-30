@@ -468,3 +468,10 @@ tile_set = SubResource("TileSet_036b0")
 tile_set = SubResource("TileSet_dwbse")
 
 [node name="Fans" type="Node2D" parent="." unique_id=915145224]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1915890669]
+
+[node name="HeightLabel" type="Label" parent="CanvasLayer" unique_id=584575453]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "10m"
